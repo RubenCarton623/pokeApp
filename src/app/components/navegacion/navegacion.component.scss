@@ -1,0 +1,23 @@
+img{
+    height: 25px;
+    width: 25px;
+}
+.rota-horizontal{
+    transform: scaleX(-1);
+}
+.botones{
+    padding: 10px;
+   
+}
+button{
+    border-radius: 10px;
+    background: -webkit-linear-gradient(rgba(146, 153, 160, 0), rgba(166, 184, 202, 0), rgba(166, 184, 202, 0));
+}
+.direcciones{
+    display: flex;
+    justify-content: space-between;
+}
+
+button:hover{
+    cursor: pointer;
+}

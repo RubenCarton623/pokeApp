@@ -1,0 +1,76 @@
+<app-navegacion [offset]="offset" [limit]="limit" (siguiente)="nextPag($event)" (regresar)="volverPag($event)"></app-navegacion>
+
+<div class="contenedor" id="contenedor">    
+    <app-pokemon 
+    class="pokemon"
+    [pokemon]="pokemo" 
+    *ngFor="let pokemo of pokemon"
+    (showPokemon)="mostrarPokemon($event)"
+    (color)="llamarColor($event)"
+    ></app-pokemon>    
+</div>
+<div class="contenedor--informacion" [class.active]="detalles_pokemon" [ngStyle]="{'background-color': color}">
+    <div  *ngIf="pokemonSeleccionado">        
+        <div class="botonCerrar">
+            <button (click)="aplastarPokemon()">
+                <img class="regresarButtom" src="../../assets/imagen/volver.png" alt="">
+            </button>
+        </div>        
+        <div class="datos-principales">
+            <div class="nombre-id">
+                <div class="nombre">
+                    <h1>{{pokemonSeleccionado.name}}</h1>        
+                </div>
+                <div class="nombre">
+                    <h1>{{pokemonSeleccionado.id}}</h1>        
+                </div>
+            </div>
+            <div class="tipos">
+                <div *ngFor="let objeto of pokemonSeleccionado.types">  
+                    <h3>{{objeto.type.name}}</h3>
+                </div>            
+            </div>
+        </div>        
+        <div class="contenedor--menor"> 
+            <ul class="menu">            
+                <li><a href="" (click)="activarAbout()">Acerca de</a></li>
+                <li><a href="" (click)="activarBaseStats()">Base de Datos</a></li>
+                <li><a href="" (click)="activarEvolution()">Evolucion</a></li>
+                <li><a href="" (click)="activarMoves()">Movimientos</a></li>
+            </ul>   
+            <div *ngIf="about">
+                <div>
+                    <label>Species:</label>
+                    <label></label>
+                </div>
+                <div>
+                    <label>Height:</label>
+                    <label>{{pokemonSeleccionado.height}}</label>
+                </div>
+                <div>
+                    <label>Weight:</label>
+                    <label>{{pokemonSeleccionado.weight}}</label>
+                </div>
+                <div>
+                    <label>Abilities:</label>
+                    <div *ngFor="let habilidad of pokemonSeleccionado.abilities">
+                        <label>{{habilidad.ability.name}}</label>
+                    </div>
+                </div>
+                
+            </div>
+            <div *ngIf="baseStats">
+                <h1>hola2</h1>
+            </div>
+            <div *ngIf="evolution">
+                <h1>hola3</h1>
+            </div>
+            <div *ngIf="moves">
+                <h1>hola4</h1>
+            </div>
+        </div>
+        <div class="contenedorImagen">
+            <img class="pokemonImg" [src]="pokemonSeleccionado.sprites.other.dream_world.front_default" alt="">  
+        </div>      
+    </div>    
+</div>

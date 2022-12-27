@@ -1,0 +1,144 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 90%;    
+       margin: auto;
+  }
+  
+  // tablets
+  @media screen and (min-width: 30em) and (max-width: 63.9em){
+    .contenedor {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 15px;
+      width: 90%;    
+       margin: auto;
+       
+       
+    }
+  }
+  
+  // web
+  @media screen and (min-width: 64em){
+    .contenedor {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 15px;
+      width: 90%;    
+       margin: auto;
+    }
+  }
+ 
+  a:hover {
+    cursor: pointer;
+    }
+    button:hover {
+        cursor: pointer;
+    }
+
+  .contenedor--informacion {
+    background: -webkit-linear-gradient(rgba(146, 153, 160, 0.5), rgba(166, 184, 202, 0.5), rgb(166, 184, 202, 0.5));
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.5s ease-out;
+    transform: translateY(100%);
+    &.active{
+      transform: translateY(0);      
+    }
+  }
+
+  
+
+  .contenedor--menor{
+    padding: 30px;
+    border-radius: 20px;
+    position: fixed;
+    top: 40%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;    
+    transform: translateY(10%);
+  }
+.pokemonImg{
+    width: 210px;
+    height: 210px;         
+    
+    transform: translateY(-30px);
+    margin: 0;  
+    width: auto;  
+}
+.nombre h1{
+    font-style: arial; 
+    text-transform:capitalize;
+    color: white;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+}
+
+.tipos{
+  display: flex;  
+  width: 95%;
+  margin: auto;
+  
+}
+.nombre-id{
+  display: flex;
+  justify-content: space-between;  
+}
+h3{
+  padding: 5px;
+  color: rgba($color: white, $alpha: 1.0);  
+}
+
+.datos-principales{
+  width: 90%;
+  margin: auto;
+}
+
+.contenedorImagen{    
+    text-align:center;    
+}
+
+.contenedor--menor .menu{
+    list-style: none;
+    display: flex;
+    padding: 10px;
+
+    background-color: white;
+    width: 100%;        
+    justify-content: center;
+}
+li a{
+    padding: 10px;
+}
+
+.regresarButtom{
+    width: 30px;
+    height: 30px;
+}
+.botonCerrar button{
+    border-radius: 10px;
+    background: -webkit-linear-gradient(rgba(146, 153, 160, 0), rgba(166, 184, 202, 0), rgba(166, 184, 202, 0));
+}
+.botonCerrar{
+  width: 95%;
+  margin: auto;
+  padding: 10px;
+}
+
+li:hover{
+  cursor: pointer;
+  background-color: rgb(207, 207, 207);
+  
+}
