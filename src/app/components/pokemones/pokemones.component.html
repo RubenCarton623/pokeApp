@@ -1,76 +1,190 @@
-<app-navegacion [offset]="offset" [limit]="limit" (siguiente)="nextPag($event)" (regresar)="volverPag($event)"></app-navegacion>
+<app-navegacion [skeleton]="Skeleton" [offset]="offset" [limit]="limit"  (siguiente)="nextPag($event)" (regresar)="volverPag($event)"></app-navegacion>
 
-<div class="contenedor" id="contenedor">    
-    <app-pokemon 
+<div class="contenedor contenido" id="contenido" *ngIf="Skeleton" >    
+    <app-pokemon [style.display]="display"
     class="pokemon"
     [pokemon]="pokemo" 
-    *ngFor="let pokemo of pokemon"
+    *ngFor="let pokemo of pokemonesMostrar"
     (showPokemon)="mostrarPokemon($event)"
     (color)="llamarColor($event)"
     ></app-pokemon>    
 </div>
-<div class="contenedor--informacion" [class.active]="detalles_pokemon" [ngStyle]="{'background-color': color}">
-    <div  *ngIf="pokemonSeleccionado">        
+<div class="contenedor eliminar" id="contenedor">    
+    <app-pokemon     
+    *ngFor="let pokemo of valoresEsqueleto"
+    class="animated slow flash infinite"    
+    ></app-pokemon>    
+</div>
+<div class="contenedor--informacion" [class.active]="detalles_pokemon" >        
+    <div  *ngIf="pokemonSeleccionado" class="contenedor--interno" [ngStyle]="{'background-color': color}">        
         <div class="botonCerrar">
-            <button (click)="aplastarPokemon()">
+            <button (click)="aplastarPokemon(); activarAbout()" (keyUp.enter)="aplastarPokemon()">
                 <img class="regresarButtom" src="../../assets/imagen/volver.png" alt="">
             </button>
         </div>        
         <div class="datos-principales">
-            <div class="nombre-id">
-                <div class="nombre">
+            <div class="nombre-id" [class.active]="activadorContenedorIntermno">
+                <div class="nombre" [class.active]="activadorContenedorIntermno" id="nombre">
                     <h1>{{pokemonSeleccionado.name}}</h1>        
                 </div>
-                <div class="nombre">
-                    <h1>{{pokemonSeleccionado.id}}</h1>        
+                <div class="nombre" id="id" [class.active]="activadorContenedorIntermno">
+                    <h1># {{ceros}}{{pokemonSeleccionado.id}}</h1>        
                 </div>
             </div>
             <div class="tipos">
-                <div *ngFor="let objeto of pokemonSeleccionado.types">  
-                    <h3>{{objeto.type.name}}</h3>
-                </div>            
+                <div *ngFor="let objeto of pokemonSeleccionado.types" [ngStyle]="{'background-color': color}" class="poke">                      
+                    <div class="poli">
+                        <h3>{{objeto.type.name}}</h3> 
+                    </div>                   
+                </div>                           
             </div>
         </div>        
-        <div class="contenedor--menor"> 
-            <ul class="menu">            
-                <li><a href="" (click)="activarAbout()">Acerca de</a></li>
-                <li><a href="" (click)="activarBaseStats()">Base de Datos</a></li>
-                <li><a href="" (click)="activarEvolution()">Evolucion</a></li>
-                <li><a href="" (click)="activarMoves()">Movimientos</a></li>
-            </ul>   
-            <div *ngIf="about">
-                <div>
-                    <label>Species:</label>
-                    <label></label>
-                </div>
-                <div>
-                    <label>Height:</label>
-                    <label>{{pokemonSeleccionado.height}}</label>
-                </div>
-                <div>
-                    <label>Weight:</label>
-                    <label>{{pokemonSeleccionado.weight}}</label>
-                </div>
-                <div>
-                    <label>Abilities:</label>
-                    <div *ngFor="let habilidad of pokemonSeleccionado.abilities">
-                        <label>{{habilidad.ability.name}}</label>
+        <div class="contenedor--menor" (click)="screenEvolution()" [class.active]="activadorContenedorIntermno"> 
+            <div class="contenido">
+                <ul class="menu">            
+                    <li><button [class.active]="about" id="boton1" (click)="activarAbout()">Acerca de</button></li>
+                    <li><button [class.active]="baseStats" id="boton2" (click)="activarBaseStats()">Base de Datos</button></li>
+                    <li><button [class.active]="evolution" id="boton3" (click)="activarEvolution()">Evolucion</button></li>      
+                </ul>                 
+            </div> 
+            <div *ngIf="about" class="about">
+                <div class="descripcion">
+                    <p >
+                        {{tiposSeleccionado[0].flavor_text_entries[6].flavor_text}}
+                    </p>
+                </div>                
+                <div class="altura--peso--habilidad">
+                    <div class="titulos">
+                        <label class="label1">Height:</label>
+                        <label class="label1">Weight:</label>
+                        <label class="label1">Abilities:</label>                                        
+                        <label class="label1">Egg Groups:</label>
+                        <label class="label1">Egg Cycle:</label>        
                     </div>
-                </div>
+                    <div class="respuestas">
+                        <label class="label1">&nbsp;{{pieP}} ({{pokemonSeleccionado.height}} m)</label>
+                        <label class="label1">&nbsp;{{libras}} lbs ({{pokemonSeleccionado.weight}} kg)</label>
+                        <div class="habilidades label1">                        
+                            <div *ngFor="let habilidad of pokemonSeleccionado.abilities;index as i" class="habilidad">
+                                    <label *ngIf="i+1 < pokemonSeleccionado.abilities.length ;else elseBloque">{{habilidad.ability.name}},</label>
+                                    <ng-template #elseBloque>
+                                        <label >{{habilidad.ability.name}}</label>
+                                    </ng-template>
+                            </div>
+                        </div>                         
+                        <div class="habilidades label1">                        
+                            <div *ngFor="let grupo of tiposSeleccionado[0].egg_groups;index as i" class="habilidad">
+                                    <label *ngIf="i+1 < tiposSeleccionado[0].egg_groups.length ;else elseBloque">{{grupo.name}},</label>
+                                    <ng-template #elseBloque>
+                                        <label >{{grupo.name}}</label>
+                                    </ng-template>
+                            </div>
+                        </div>                         
+                        <div class="habilidades label1">                        
+                            <div *ngFor="let objeto of pokemonSeleccionado.types;index as i" class="habilidad">
+                                    <label *ngIf="i+1 < pokemonSeleccionado.types.length ;else elseBloque">{{objeto.type.name}},</label>
+                                    <ng-template #elseBloque>
+                                        <label >{{objeto.type.name}}</label>
+                                    </ng-template>
+                            </div>
+                        </div>                     
+                    </div>
+                </div>                                
                 
             </div>
-            <div *ngIf="baseStats">
-                <h1>hola2</h1>
+            <div *ngIf="baseStats" class="baseStats">
+                <div class="altura--peso--habilidad">
+                    <div class="titulos">
+                        <label class="label1">hp:</label>
+                        <label class="label1">attack:</label>
+                        <label class="label1">defense:</label>                                        
+                        <label class="label1">sp. atk:</label>
+                        <label class="label1">sp. def:</label>
+                        <label class="label1">speed:</label>
+                        <label class="label1">total:</label>
+                    </div>
+                    <div class="respuestas">
+                        <div class="respuestas" *ngFor="let stats of pokemonSeleccionado.stats;">
+                            <label *ngIf="stats.stat.name == 'hp';" class="label1">{{stats.base_stat}}</label>
+                            <label *ngIf="stats.stat.name == 'attack'" class="label1">{{stats.base_stat}}</label>
+                            <label *ngIf="stats.stat.name == 'defense'" class="label1">{{stats.base_stat}}</label>                                        
+                            <label *ngIf="stats.stat.name == 'special-attack'" class="label1">{{stats.base_stat}}</label>
+                            <label *ngIf="stats.stat.name == 'special-defense'" class="label1">{{stats.base_stat}}</label>
+                            <label *ngIf="stats.stat.name == 'speed'" class="label1">{{stats.base_stat}}</label>
+                        </div>
+                        <label class="label1">{{total}}</label>                        
+                    </div>
+                    <div class="barras">
+                        <div class="respuestas" *ngFor="let stats of pokemonSeleccionado.stats;">
+                            <progress style="width: 100%;" max="100" [value]="stats.base_stat"></progress>    
+                        </div>                        
+                        <progress style="width: 100%;" max="1000" [value]="total"></progress>
+                    </div>                   
+                </div>
             </div>
             <div *ngIf="evolution">
-                <h1>hola3</h1>
-            </div>
-            <div *ngIf="moves">
-                <h1>hola4</h1>
-            </div>
+                <div class="titulo--evolucion">
+                    <div>
+                        <h2>Evolution Chain</h2>
+                    </div>
+                    <div>
+                        <div class="evolucion" *ngIf="evolucion2; else elseImg">                            
+                            <div class="details">
+                                <img [src]="nombre1" alt="">                                
+                                <p>{{name1}}</p>                                
+                            </div>
+                            <div class="nivel" *ngIf="level1>0; else feli">
+                                <p >Lvl {{level1}}</p>
+                            </div>
+                            <ng-template class="nivel" #feli >
+                                <p style="height: 50%; margin: auto;">Happiness</p>
+                            </ng-template>
+                            <div class="details">
+                                <img [src]="nombre2" alt="">                                
+                                <p>{{name2}}</p>                                
+                            </div>
+                        </div>
+                        <ng-template #elseImg>
+                            <h2>No hay evolucion</h2>
+                        </ng-template>
+                        <div class="evolucion" *ngIf="evolucion3">
+                            <div class="details">
+                                <img [src]="nombre2" alt="">                                
+                                <p>{{name2}}</p>                                
+                            </div>
+                            <div class="nivel"*ngIf="level2>0; else pe">
+                                <p>Lvl {{level2}}</p>
+                            </div>
+                            <ng-template class="nivel" #pe >
+                                <p style="height: 50%; margin: auto;">Evolution Stone</p>
+                            </ng-template>
+                            <div class="details">
+                                <img [src]="nombre3" alt="">                                
+                                <p>{{name3}}</p>                                
+                            </div>
+                        </div>                                                
+                    </div>
+                    <div *ngIf="megaEvolucion && evolucion2">
+                        <h2>Mega Evolution</h2>
+                    </div>
+                    <div class="evolucion" *ngIf="megaEvolucion && evolucion2">
+                        <div class="details">
+                            <img [src]="nombre3" alt="">                            
+                            <p>{{name3}}</p>                            
+                        </div>
+                        <div class="nivel">
+                            <p>Mega Stone</p>
+                        </div>
+                        <div class="details">
+                            <img [src]="nombre4" alt="">                            
+                            <p>{{name4}}</p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
-        <div class="contenedorImagen">
-            <img class="pokemonImg" [src]="pokemonSeleccionado.sprites.other.dream_world.front_default" alt="">  
+        <div class="contenedorImagen" [class.active]="activadorContenedorIntermno">            
+            <img class="pokemonImg" [src]="pokemonSeleccionado.sprites.other['official-artwork'].front_default" alt="">  
         </div>      
     </div>    
 </div>

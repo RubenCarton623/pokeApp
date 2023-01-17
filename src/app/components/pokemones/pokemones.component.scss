@@ -6,20 +6,44 @@
   }
   
   // tablets
-  @media screen and (min-width: 30em) and (max-width: 63.9em){
+  @media screen and (min-width: 0em) and (max-width: 60em){
+    .contenedor--menor{      
+      top: 50%;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }    
+    p{
+      -webkit-user-select: all;
+      -moz-user-select:  all;
+      -ms-user-select: all;
+      user-select: all;
+    }
     .contenedor {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 15px;
       width: 90%;    
        margin: auto;
-       
-       
+              
+    }
+    .pokemonImg{      
+      transform: translateY(-30px);      
+  }
+    .contenedor--interno{
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0; 
+      width: 100%;
+      margin: auto;
+      background: -webkit-linear-gradient(rgba(146, 153, 160, 0.5), rgba(166, 184, 202, 0.5), rgb(166, 184, 202, 0.5));
     }
   }
   
   // web
-  @media screen and (min-width: 64em){
+  @media screen and (min-width: 60.1em){
     .contenedor {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -27,17 +51,39 @@
       width: 90%;    
        margin: auto;
     }
+    .contenedor--interno{
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0; 
+      width: 35%;
+      margin: auto;
+      background: -webkit-linear-gradient(rgba(146, 153, 160, 0.5), rgba(166, 184, 202, 0.5), rgb(166, 184, 202, 0.5));
+    }
+    .contenedor--menor{
+      width: 35%;
+      margin: auto;
+      top: 40%;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      
+    }    
+    .contenedor--informacion{
+      background:rgba(86, 90, 95, 0.5);
+    }
   }
- 
+  
   a:hover {
     cursor: pointer;
     }
     button:hover {
-        cursor: pointer;
+        cursor: pointer;        
     }
+    
 
-  .contenedor--informacion {
-    background: -webkit-linear-gradient(rgba(146, 153, 160, 0.5), rgba(166, 184, 202, 0.5), rgb(166, 184, 202, 0.5));
+  .contenedor--informacion {        
     position: fixed;
     top: 0;
     left: 0;
@@ -47,7 +93,7 @@
     flex-direction: column;
     justify-content: flex-start;
     transition: all 0.5s ease-out;
-    transform: translateY(100%);
+    transform: translateY(100%);    
     &.active{
       transform: translateY(0);      
     }
@@ -55,8 +101,7 @@
 
   
 
-  .contenedor--menor{
-    padding: 30px;
+  .contenedor--menor{    
     border-radius: 20px;
     position: fixed;
     top: 40%;
@@ -68,38 +113,65 @@
     flex-direction: column;
     justify-content: flex-start;    
     transform: translateY(10%);
+    transition: .2s ease-in-out all;
+    &.active{
+      top: 0%;
+    }
   }
 .pokemonImg{
     width: 210px;
     height: 210px;         
     
-    transform: translateY(-30px);
-    margin: 0;  
-    width: auto;  
+    transform: translateY(0px);
+    margin: 0;      
 }
 .nombre h1{
     font-style: arial; 
     text-transform:capitalize;
     color: white;
-    width: 90%;
+    width: 100%;
     margin: auto;
     padding: 10px;
+    font-size: 20;    
 }
-
-.tipos{
-  display: flex;  
-  width: 95%;
-  margin: auto;
-  
+#nombre{  
+  width: 70%;
+  &.active{
+    transform: translateY(-50px);
+  }
+}
+#id{
+  &.active{
+    display: none;
+  }
 }
 .nombre-id{
   display: flex;
   justify-content: space-between;  
+  &.active{
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+  }
 }
-h3{
-  padding: 5px;
-  color: rgba($color: white, $alpha: 1.0);  
-}
+.tipos{    
+    display: flex;       
+    flex-direction: row;        
+  }
+  .tipos .poke{     
+    width: 70px;             
+    border-radius: 10px;   
+    margin-left: 5px;
+    background: -webkit-linear-gradient(rgba(255, 255, 255, 0.5), rgba(245, 246, 247, 0.5), rgba(242, 244, 247, 0.5));                
+  }
+  
+  h3{
+    text-transform:capitalize;           
+    color: rgba($color: white, $alpha: 1.0);          
+    line-height: 0px;  
+    text-align: center;  
+  }  
 
 .datos-principales{
   width: 90%;
@@ -108,6 +180,9 @@ h3{
 
 .contenedorImagen{    
     text-align:center;    
+    &.active{
+      display: none;
+    }
 }
 
 .contenedor--menor .menu{
@@ -115,14 +190,38 @@ h3{
     display: flex;
     padding: 10px;
 
-    background-color: white;
-    width: 100%;        
-    justify-content: center;
-}
-li a{
-    padding: 10px;
+    background-color: white;          
+    justify-content: space-evenly;
 }
 
+p::first-letter {  
+  text-transform: capitalize;
+  }
+.descripcion, h4{
+  width: 90%;
+  margin: auto;
+  text-align: justify;
+  transform: translateY(-20px);
+}
+li button{
+    padding: 10px;
+    background: -webkit-linear-gradient(rgba(146, 153, 160, 0), rgba(166, 184, 202, 0), rgba(166, 184, 202, 0));      
+    border-bottom: 0;
+    border-left: 0ch;
+    border-top: 0ch;
+    border-right: 0ch;
+    text-align: center;
+    width: 100%;        
+    transition: .2s ease-in-out all;
+    &.active{
+      background: rgba(228, 223, 223, 0.804);
+      font-weight: bold;
+      border-radius: 10px;
+    }
+}
+li{
+  width: 100%;    
+}
 .regresarButtom{
     width: 30px;
     height: 30px;
@@ -136,9 +235,99 @@ li a{
   margin: auto;
   padding: 10px;
 }
+ul .indicador{
+  width: 200px;
+  height: 7px;
+  background: rgb(8, 8, 124);
+  position: absolute;
+  bottom: 0;
+}
 
 li:hover{
-  cursor: pointer;
-  background-color: rgb(207, 207, 207);
+  cursor: pointer;  
+  background-color: beige;
+  border-radius: 10px;
+}
+
+.altura--peso--habilidad{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: auto;
+  transform: translateY(-20px);
+}
+
+.habilidades{
+  display: flex;       
+  flex-direction: row;   
+}
+.habilidad{
+  margin-left: 5px;
+}
+label{
+  text-transform:capitalize;  
+}
+
+.titulos, .respuestas, .barras{
+  display: flex;
+  flex-direction: column;
   
+}
+.respuestas{
+  justify-content: space-between;  
+}
+.barras{
+  justify-content: space-between;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.titulos label{
+  color: gray;
+}
+.respuestas .label1,.titulos .label1, .barras{
+  margin-top: 10px;
+}
+.respuestas .label1{
+  margin-left: 50px;
+}
+
+
+p, label, h1,h3{
+  -webkit-user-select: text;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: text; 
+}
+
+.titulo--evolucion{
+  width: 70%;
+  margin: auto;
+  transform: translateY(-20px);
+}
+.titulo--evolucion img{
+  width: 100px;
+  height: 100px;  
+}
+
+.evolucion{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  .nivel{
+    height: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.details p{  
+  text-align: center;    
+  margin-top: 0;
+}
+.details{
+  display: flex;
+  flex-direction: column;  
 }

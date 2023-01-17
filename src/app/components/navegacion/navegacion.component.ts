@@ -12,6 +12,7 @@ export class NavegacionComponent {
   @Input() offset=0;
   @Input() limit=0;  
 
+  @Input() skeleton = false;
   anterioresPokemones(){
     this.regresar.emit(this.offset-this.limit);
   }

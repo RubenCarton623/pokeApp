@@ -1,15 +1,34 @@
-<div class="contenedor" >
-    <div class="direcciones">
-        <div class="botones">
-            <!-- <a ><img src="../../assets/imagen/volver.png" alt=""></a> -->
-            <h1 style="width: 90%; margin: auto;">Pokedex</h1>
+<div class="contenedor" *ngIf="skeleton">
+    <div class="direcciones" >
+        <div class="" >            
+            <a><h1 style="width: 90%; margin: auto;">Pokédex</h1></a>
         </div>
-        <div class="botones">
-            <button (click)="anterioresPokemones()"><img src="../../assets/imagen/volver.png" alt=""></button>
-            <button (click)="posterioresPokemones()"><img style="transform: scaleX(-1);" src="../../assets/imagen/volver.png" alt=""></button>
+        <div class="botones" >
+            <div class="boton">
+                <button (click)="anterioresPokemones()" (keyUp.a)="anterioresPokemones()"><img src="../../assets/imagen/volver.png" alt=""></button>
+            </div>
+            <div class="boton">
+                <button (click)="posterioresPokemones()" (keyUp.d)="anterioresPokemones()"><img style="transform: scaleX(-1);" src="../../assets/imagen/volver.png" alt=""></button>
+            </div>            
         </div>
     </div>
-    <div>
-        
+</div>
+<div class="contenedor animated slow flash infinite eliminar">
+    <div class="direcciones">
+        <div class="">                        
+            <h1 style="border-radius: 10px;width: 90%; margin: auto;color: rgba(169, 169, 169, 0.521);background: rgba(169, 169, 169, 0.521);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>            
+        </div>
+        <div class="botones">
+            <div class="boton">
+                <button disabled alt="" style="cursor: not-allowed;
+                background-color: rgb(229, 229, 229) !important;
+                pointer-events:none; width: 42px; height: 34px;"></button>
+            </div>
+            <div class="boton">
+                <button disabled alt="" style="cursor: not-allowed;
+                background-color: rgb(229, 229, 229) !important;
+                pointer-events:none; width: 42px; height: 34px;"></button>
+            </div>            
+        </div>
     </div>
 </div>

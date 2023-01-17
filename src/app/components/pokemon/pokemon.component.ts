@@ -1,8 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Pokemon } from '../../models/pokemon.model';
-
-import { TiposService } from '../../services/tipos.service';
-import { Tipo } from 'src/app/models/tipos.model';
+import { Pokemon } from '../../core/interfaces/pokemon.interface';
+import { TiposService } from '../../core/services/tipos.service';
 
 @Component({
   selector: 'app-pokemon',
@@ -13,6 +11,8 @@ export class PokemonComponent implements OnInit{
   constructor(private tiposService: TiposService){
 
   }
+
+  imageDefault = "../../assets/imagen/pokebola.png";
   @Output() showPokemon = new EventEmitter<number>();
     detallesPokemon(){
       this.showPokemon.emit(this.pokemon.id);
@@ -58,6 +58,10 @@ export class PokemonComponent implements OnInit{
     {
       tipo: 'ice',
       color:'#91fff4'
+    },
+    {
+      tipo: 'dragon',
+      color:'#08CDB8'      
     },
     {
       tipo: 'fighting',
@@ -110,7 +114,8 @@ export class PokemonComponent implements OnInit{
 ];
 
 
-  
+  @Input() offset=0;
+  @Input() limit=0;  
   
   
   @Input() pokemon: Pokemon = {

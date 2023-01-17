@@ -1,18 +1,22 @@
-
-<!-- <label>Ingrese Id</label> -->
-<!-- <input type="number"  [(ngModel)]="pokemon.id"> -->
-<!-- <button (click)="llamarPokemon()">Buscar</button> -->
-<div class="contenedor-pokemon" [ngStyle]="{'background-color': color2}">
-    <button class="boton" (click)="detallesPokemon(); obtenerColor()">        
-        <h2 style = "text-transform:capitalize; color: white;">{{pokemon.name}}</h2>
+<div class="contenedor-pokemon" [ngStyle]="{'background-color': color2}" onmousedown = 'return false' onselectstart = 'return false'>
+    <button class="boton" (click)="detallesPokemon(); obtenerColor()" onmousedown = 'return false' onselectstart = 'return false'>        
+        <h2 style = "color: white;">{{pokemon.name}}</h2>
         <div class="contenedor-detalles">            
             <div class="tipos">
-                <div *ngFor="let objeto of pokemon.types">  
-                    <h3>{{objeto.type.name}}</h3>
-                </div>            
+                <div *ngFor="let objeto of pokemon.types" [ngStyle]="{'background-color': color2}" class="poke">                      
+                        <div class="poli">
+                            <h3>{{objeto.type.name}}</h3> 
+                        </div>                   
+                </div>                            
             </div>
             <div class="imagen">
-                <img [src]="pokemon.sprites.other.dream_world.front_default" alt="">
+                <img [src]="pokemon.sprites.other['official-artwork'].front_default" 
+                onmousedown = 'return false' onselectstart = 'return false'
+                *ngIf="pokemon.sprites.other['official-artwork'].front_default; else elseImg"
+                alt="">
+                <ng-template #elseImg>
+                    <img class="imagenes" [src]="imageDefault" alt="" onmousedown = 'return false' onselectstart = 'return false'>
+                </ng-template>
             </div>
         </div>        
     </button>
